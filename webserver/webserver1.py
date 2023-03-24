@@ -27,13 +27,6 @@ try:
           message = connectionSocket.recv(2048).decode()
           # print(message)
           filename = message.split()[1]
-          filetype = filename.split(".")[1]
-
-          # print(data)
-          if (filetype != "html"):
-            connectionSocket.close()
-            continue
-
           with open(filename[1:], 'r') as f:
             ### YOUR CODE HERE ###
             outputdata = f.readlines()
@@ -41,7 +34,7 @@ try:
           # Send one HTTP header line into socket
           ### YOUR CODE HERE ###
           connectionSocket.send(("HTTP/1.1 200 OK\r\n").encode())
-          connectionSocket.send("Content-Type: text/html\r\n".encode())
+          connectionSocket.send("Content-Type: text\html\r\n".encode())
           # connectionSocket.send("\r\n".encode())
 
           # Send the content of the requested file into socket
@@ -59,6 +52,8 @@ try:
           # Close client socket
           ### YOUR CODE HERE ###
           connectionSocket.close()
+      except:
+         connectionSocket.close()
           
 except KeyboardInterrupt:
   
@@ -68,4 +63,4 @@ except KeyboardInterrupt:
   # Terminate the program after sending the corresponding data
   sys.exit()
 
-
+serverSocket.close()
