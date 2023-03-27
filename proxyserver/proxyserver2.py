@@ -22,7 +22,7 @@ def threadFunc(conn):
         webserverSocket = socket(AF_INET, SOCK_STREAM)
         data = conn.recv(2048).decode()
         filename = data.split()[1][1:]
-        if cacheData.keys().__contains__(filename) and (time.time() - cacheData[filename][1] < 10 ):
+        if cacheData.keys().__contains__(filename) and (time.time() - cacheData[filename][1] < 120 ):
             # conn.send("HTTP/1.1 200 OK\r\n".encode())
             # conn.send("Content-Type: text/html\r\n".encode())
             conn.sendall(cacheData[filename][0].encode())
