@@ -67,7 +67,7 @@ def threadedClient(conn, addr):
           conn.sendall(lines[i].encode())
         conn.sendall("\r\n".encode())
     # time.sleep(4)
-    print(f'server-response, {statusCode}, {threadId}, {time.strftime("%H:%M:%S", time.localtime())}')
+    print(f'server-response, {statusCode}, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}')
 
   except IOError:
     serverresponse = "Not Found"
@@ -77,7 +77,7 @@ def threadedClient(conn, addr):
     # conn.send("HTTP/1.1 200 OK\r\n".encode())
     conn.close()
 
-    print(f'server-response, {statusCode}, {threadId}, {time.strftime("%H:%M:%S", time.localtime())}')
+    print(f'server-response, {statusCode}, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}')
 
   except KeyboardInterrupt:
       flag = True
@@ -98,7 +98,7 @@ try:
 
     # print('Connected to: ' + address[0] + ':' + str(address[1]))
     _thread.start_new_thread(threadedClient, (client, address))
-    print(f'number of thread: {_thread._count()}')
+    # print(f'number of thread: {_thread._count()}')
     
     
 except KeyboardInterrupt:
