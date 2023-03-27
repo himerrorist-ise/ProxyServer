@@ -22,7 +22,7 @@ def threadFunc(conn):
         webserverSocket = socket(AF_INET, SOCK_STREAM)
         data = conn.recv(2048).decode()
         filename = data.split()[1][1:]
-        if cacheData.keys().__contains__(filename) and (time.time() - cacheData[filename][1] < 20 ):
+        if cacheData.keys().__contains__(filename) and (time.time() - cacheData[filename][1] < 10 ):
             # conn.send("HTTP/1.1 200 OK\r\n".encode())
             # conn.send("Content-Type: text/html\r\n".encode())
             conn.sendall(cacheData[filename][0].encode())
@@ -36,7 +36,7 @@ def threadFunc(conn):
             print(f'\nproxy-forward, server, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}')
             cacheData[filename] = [response, time.time()]
             conn.sendall(response.encode())
-            # time.sleep(4)
+            time.sleep(4)
             print(f'proxy-forward, client, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}\n')
         conn.close()
         webserverSocket.close()

@@ -43,7 +43,7 @@ def threadedClient(conn, addr):
         conn.sendall("HTTP/1.1 200 OK\r\n".encode())
         # conn.sendall("Content-Type: application/pdf\r\n".encode())
         conn.sendall("Content-Type: application/pdf\n".encode())
-        conn.sendall("Content-Disposition: attachment; filename=ex.pdf\n".encode())
+        conn.sendall(f'Content-Disposition: attachment; filename={filename[1:]}\r\n'.encode())
         # conn.sendall("\r\n".encode())
 
         # for i in range(0, len(lines)):
@@ -66,7 +66,7 @@ def threadedClient(conn, addr):
         for i in range(0, len(lines)):
           conn.sendall(lines[i].encode())
         conn.sendall("\r\n".encode())
-    # time.sleep(4)
+    time.sleep(4)
     print(f'server-response, {statusCode}, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}')
 
   except IOError:
