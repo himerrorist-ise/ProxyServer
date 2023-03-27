@@ -66,7 +66,7 @@ def threadedClient(conn, addr):
         for i in range(0, len(lines)):
           conn.sendall(lines[i].encode())
         conn.sendall("\r\n".encode())
-    time.sleep(4)
+    # time.sleep(4)
     print(f'server-response, {statusCode}, {_thread.get_ident()}, {time.strftime("%H:%M:%S", time.localtime())}')
 
   except IOError:
